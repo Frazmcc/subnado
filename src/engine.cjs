@@ -4,7 +4,7 @@ const providers=Object.freeze([]);
 // recipient authorisation independently. Never build an arbitrary-address mailer.
 async function run(input){
   const email=typeof input?.email==='string'?input.email.trim():'';
-  if(email.length>254||! /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email))return {ok:false,error:'Enter a valid email address.'};
+  if(email.length>254||! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return {ok:false,error:'Enter a valid email address.'};
   const report={ok:true,attempted:0,confirmed:0,pending:0,skipped:0,failed:0,providers:[],message:'No authorised publisher integrations are configured. No subscription requests were sent.'};
   for(const provider of providers){
     if(typeof provider.isAuthorised!=='function'||typeof provider.subscribe!=='function')continue;
