@@ -28,6 +28,16 @@ footer{font-size:.8rem;color:#9caccc;margin-top:27px;line-height:1.6}
 const email=document.getElementById('email');
 const status=document.getElementById('status');
 const error=document.getElementById('error');
-document.getElementById('run').addEventListener('click',async()=>{\n status.hidden=true;error.textContent='';\n if(!email.checkValidity()){error.textContent='Enter a valid email address to continue.';email.focus();return;}\n const button=document.getElementById('run');button.disabled=true;button.textContent='Running…';\n try{const response=await fetch('/api/run',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email.value.trim()})});\n const data=await response.json();if(!response.ok)throw Error(data.error||'Run failed');\n document.getElementById('status-title').textContent='Run complete';\n document.getElementById('status-details').textContent='Attempted: '+data.attempted+' · Confirmed: '+data.confirmed+' · Pending: '+data.pending+' · Skipped: '+data.skipped+' · Failed: '+data.failed+'. '+data.message;\n status.hidden=false;\n }catch(e){error.textContent=e.message==='Failed to fetch'?'Run requires the Subnado server. Start it with npm start.':e.message;}\n finally{button.disabled=false;button.textContent='▶ Run Subnado';}\n});
+document.getElementById('run').addEventListener('click',async()=>{
+ status.hidden=true;error.textContent='';
+ if(!email.checkValidity()){error.textContent='Enter a valid email address to continue.';email.focus();return;}
+ const button=document.getElementById('run');button.disabled=true;button.textContent='Running…';
+ try{const response=await fetch('/api/run',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email.value.trim()})});
+ const data=await response.json();if(!response.ok)throw Error(data.error||'Run failed');
+ document.getElementById('status-title').textContent='Run complete';
+ document.getElementById('status-details').textContent='Attempted: '+data.attempted+' · Confirmed: '+data.confirmed+' · Pending: '+data.pending+' · Skipped: '+data.skipped+' · Failed: '+data.failed+'. '+data.message;
+ status.hidden=false;
+ }catch(e){error.textContent=e.message==='Failed to fetch'?'Run requires the Subnado server. Start it with npm start.':e.message;}
+ finally{button.disabled=false;button.textContent='▶ Run Subnado';}\n});
 email.addEventListener('input',()=>{status.hidden=true;error.textContent='';});
 </script></body></html>
