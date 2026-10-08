@@ -1,24 +1,25 @@
 # Subnado
 
-One field. One Run button. No account or newsletter categories.
+One email field and one Run button. No account, categories or Subnado-generated email verification challenge.
 
-## Current status
+## Run locally
 
-The web frontend validates an email address and explains why registration cannot begin yet. **It does not submit, verify or subscribe any email address.** Opening this static page should never generate outgoing subscription requests.
+Requires Node.js 22 or newer.
 
-## Intended production workflow
+```sh
+npm start
+```
 
-1. User enters an email address and presses Run.
-2. Subnado sends a one-time ownership verification challenge via a configured transactional email service, protected by rate limits and abuse controls. No newsletter signup requests occur before verification.
-3. When the address is verified, a server-side registration service considers consented publisher integrations only, honoring each publisher's policies and limits. Do not bypass CAPTCHA, double opt-in, or anti-bot mechanisms.
-4. An idempotency key per email and publisher prevents duplicate attempts; retry with bounded backoff only where permitted.
-5. The UI displays attempted, accepted-but-pending-confirmation, confirmed, skipped and failed separately. Never call accepted submissions confirmed without provider evidence.
-6. No account creation or category selection is required. Give clear opt-out, data retention and privacy information.
+Open http://localhost:3000. Run the tests using `npm test`.
 
-## Running
+## Current functionality
 
-Open `index.html` in a browser. Run checks using `node tests/smoke.test.cjs` (Node 22+).
+The Run button sends the entered email to a same-origin server and displays a response with attempted, confirmed, pending, skipped and failed counts. No publisher integrations are configured, therefore **no newsletter signups are attempted**. Subnado never reports an unconfirmed signup as successful. The server does not send any verification emails.
 
-## Deployment blockers
+## Integration policy
 
-The application needs an email verification backend, a verified sending domain, a database or equivalent idempotency store, publisher-approved subscription integrations, and an end-to-end test environment. These have **not** been implemented yet.
+The single-click engine supports publisher-specific adapters only where authorisation of the recipient has already been established independently and the publisher permits the integration. Entering someone's email in the input field is not proof of authorisation. Do not add arbitrary-address registration endpoints, unsolicited bulk submissions, anti-bot evasion, CAPTCHA bypass or falsified success states. Integrations must support publisher rate limits, duplicate suppression and provider-required double opt-in. Automatic registration from arbitrary unverified addresses is intentionally unsupported.
+
+## Deployment
+
+This is an initial server-backed prototype, not a production-ready bulk registration service. Configure compatible, authorised publisher integrations, abuse controls, secure hosting and end-to-end tests before describing any real signup capability.
