@@ -30,8 +30,9 @@
   document.getElementById('guided-next').addEventListener('click',()=>{
     const item=entries[index];if(!item)return;
     // A single window.open from a user click to avoid popup blocking and opening many tabs.
-    const tab=window.open(item.url,'_blank','noopener,noreferrer');
-    if(tab!==null)setStatus(item.id,'opened');
+    const tab=window.open('about:blank','_blank');
+    if(tab){tab.opener=null;tab.location.replace(item.url);setStatus(item.id,'opened');}
+    else alert('Your browser blocked the new tab. Please allow popups for Subnado or use the official signup link below.');
   });
   document.getElementById('guided-pending').addEventListener('click',()=>{
     const item=entries[index];if(!item)return;setStatus(item.id,'pending');index++;advance();
