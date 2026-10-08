@@ -16,3 +16,17 @@ assert.ok(urls.length >= 3);
 assert.equal(new Set(urls).size, urls.length, 'Duplicate newsletter signup URLs');
 for (const url of urls) assert.equal(new URL(url).protocol,'https:');
 console.log('PASS: UI, consent, HTTPS destinations, and deduplication checks ('+urls.length+' newsletter entries).');
+
+const guide=fs.readFileSync('guided.js','utf8');
+const tracker=fs.readFileSync('progress.js','utf8');
+assert.match(html,/src="guided\.js"/);
+assert.match(guide,/guided-next/);
+assert.match(guide,/guided-pending/);
+assert.match(guide,/guided-done/);
+assert.match(guide,/window\.open\('about:blank'/);
+assert.match(guide,/if\(tab\)/);
+assert.match(guide,/tab\.opener=null/);
+assert.match(guide,/localStorage\.setItem/);
+assert.match(tracker,/subnado-progress-v1/);
+assert.match(tracker,/Export CSV/);
+console.log('PASS: guided flow controls, popup handling, and shared local progress tracking.');
