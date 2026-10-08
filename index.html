@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Subnado — one address, one button."><title>Subnado</title>
+<style>
+:root{font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:#f0f7ff;color-scheme:dark;background:#070f25}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% 0,#16479c,transparent 53%),#070f25;display:grid;place-items:center}
+main{width:min(100%,600px);padding:28px 20px 56px;text-align:center}
+.mark{font-size:4.4rem;line-height:1}h1{font-size:clamp(3rem,8vw,5rem);letter-spacing:-.07em;margin:12px 0 4px}
+.tagline{color:#92d8ff;font-weight:650;margin:0 0 42px}.panel{background:#111d39;border:1px solid #375287;border-radius:23px;padding:32px;text-align:left;box-shadow:0 22px 70px #01071c70}
+label{display:block;font-weight:750;font-size:.9rem;margin-bottom:11px}input{width:100%;padding:18px 16px;border:1px solid #496393;border-radius:13px;background:#09142d;color:#fff;font:inherit;font-size:1.06rem}input:focus{outline:3px solid #54bffa}
+button{width:100%;margin-top:17px;border:0;border-radius:13px;background:linear-gradient(90deg,#4ad0ff,#2680ff);padding:19px;color:#061831;font:inherit;font-size:1.09rem;font-weight:850;cursor:pointer}button:hover{filter:brightness(1.1)}button:focus-visible{outline:3px solid white;outline-offset:3px}
+.small{color:#b2c3e3;font-size:.84rem;line-height:1.6}.error{color:#ffadb4;min-height:1.4em;font-size:.9rem}
+.status{margin-top:24px;padding:18px;border:1px solid #5279b7;border-radius:14px;background:#102747}.status[hidden]{display:none}
+.status h2{font-size:1.13rem;margin:0 0 9px}.status p{margin:0;color:#c4d4ef;line-height:1.55}
+footer{font-size:.8rem;color:#9caccc;margin-top:27px;line-height:1.6}
+@media(max-width:500px){.panel{padding:22px}}
+</style></head><body><main>
+<div class="mark" aria-hidden="true">🌪️</div><h1>Subnado</h1><p class="tagline">Unleash the subscription storm.</p>
+<section class="panel" aria-label="Subnado">
+<label for="email">Email address</label>
+<input type="email" id="email" required autocomplete="email" placeholder="you@example.com">
+<button type="button" id="run">▶ Run Subnado</button>
+<p id="error" role="alert" class="error" aria-live="polite"></p>
+<div id="status" class="status" hidden role="status" aria-live="polite"><h2 id="status-title">Run report</h2><p id="status-details"></p></div>
+<p class="small">No login, no category selection, and no Subnado verification code. Only supported, authorised publisher integrations can submit subscriptions.</p>
+</section><footer>Fast, straightforward and consent-first. CAPTCHA and publisher confirmation requirements will be respected.</footer>
+</main><script>
+'use strict';
+const email=document.getElementById('email');
+const status=document.getElementById('status');
+const error=document.getElementById('error');
+document.getElementById('run').addEventListener('click',async()=>{
+ status.hidden=true;error.textContent='';
+ if(!email.checkValidity()){error.textContent='Enter a valid email address to continue.';email.focus();return;}
+ const button=document.getElementById('run');button.disabled=true;button.textContent='Running…';
+ try{const response=await fetch('/api/run',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email.value.trim()})});
+ const data=await response.json();if(!response.ok)throw Error(data.error||'Run failed');
+ document.getElementById('status-title').textContent='Run complete';
+ document.getElementById('status-details').textContent='Attempted: '+data.attempted+' · Confirmed: '+data.confirmed+' · Pending: '+data.pending+' · Skipped: '+data.skipped+' · Failed: '+data.failed+'. '+data.message;
+ status.hidden=false;
+ }catch(e){error.textContent=e.message==='Failed to fetch'?'Run requires the Subnado server. Start it with npm start.':e.message;}
+ finally{button.disabled=false;button.textContent='▶ Run Subnado';}\n});
+email.addEventListener('input',()=>{status.hidden=true;error.textContent='';});
+</script></body></html>

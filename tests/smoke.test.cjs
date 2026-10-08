@@ -1,0 +1,14 @@
+const fs=require('node:fs');
+const assert=require('node:assert/strict');
+const html=fs.readFileSync('index.html','utf8');
+assert.match(html,/<input type="email" id="email" required/);
+assert.match(html,/<button type="button" id="run">/);
+assert.match(html,/email\.checkValidity\(\)/);
+assert.match(html,/fetch\('\/api\/run'/);
+assert.match(html,/Run complete/);
+assert.match(html,/No login, no category selection/);
+assert.doesNotMatch(html,/one.time ownership verification|verification challenge|Verification required/i);
+const engine=fs.readFileSync('src/engine.cjs','utf8');
+assert.match(engine,/providers=Object\.freeze\(\[\]\)/);
+assert.match(engine,/isAuthorised/);
+console.log('PASS: single-click interface and guarded engine wiring.');
