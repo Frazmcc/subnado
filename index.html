@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Subnado — simple, login-free newsletter discovery.">
+<title>Subnado — Unleash the subscription storm</title>
+<style>
+:root{font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:#edf5ff;background:#070f25;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% -10%,#1844a5 0,transparent 44%),#070f25}
+.container{width:min(100%,970px);margin:auto;padding:38px 20px 80px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:66px}.brand{display:flex;align-items:center;gap:12px;font-size:1.3rem;font-weight:900;letter-spacing:-.04em}.brand svg{width:44px;height:44px}.pill{border:1px solid #33558f;border-radius:99px;padding:8px 13px;color:#a7c6fa;font-size:.8rem}
+.hero{text-align:center}.eyebrow{color:#6dd7ff;text-transform:uppercase;font-size:.74rem;font-weight:800;letter-spacing:.19em}h1{font-size:clamp(2.35rem,7vw,4.65rem);letter-spacing:-.065em;line-height:1.05;margin:18px auto 16px;max-width:760px}
+.gradient{background:linear-gradient(110deg,#75ebff,#5489ff);background-clip:text;color:transparent}.intro{color:#a8b9dc;line-height:1.7;margin:0 auto 36px;max-width:650px}
+.panel{margin:36px auto 0;background:#111d39;border:1px solid #304675;border-radius:23px;padding:30px;box-shadow:0 20px 70px #01071d66}
+label{display:block;font-size:.9rem;font-weight:700;margin-bottom:10px}.emailrow{display:flex;gap:10px}.emailrow input{flex:1;min-width:0;padding:16px;border:1px solid #405682;border-radius:12px;background:#0a1430;color:#fff;font:inherit}.emailrow input:focus{outline:2px solid #62cbf8}button,.button{cursor:pointer;border:0;border-radius:12px;background:#269dff;color:#06142c;padding:14px 19px;font:inherit;font-weight:800;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}button:hover,.button:hover{filter:brightness(1.12)}button:focus-visible,.button:focus-visible,a:focus-visible{outline:3px solid #85e7ff;outline-offset:3px}.secondary{background:#23385f;color:#ecf4ff}.muted{font-size:.86rem;color:#a6b6d7;line-height:1.55}.error{color:#ffaab8;min-height:1.5em}.section-top{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:30px 0 14px}.section-top h2{margin:0;font-size:1.25rem}.actions{display:flex;gap:8px}.actions button{padding:9px 13px;font-size:.86rem}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.option{border:1px solid #35496e;background:#101b34;padding:17px;border-radius:14px;display:flex;gap:12px;cursor:pointer;align-items:start}.option:hover{border-color:#5ebeff}.option:has(input:checked){background:#142b53;border-color:#4baef5}.option input{accent-color:#43bbff;width:18px;height:18px;margin:2px 0 0}.option strong{display:block;font-size:.95rem}.option small{display:block;color:#9db3d5;margin-top:5px;line-height:1.4}
+.consent{display:flex;align-items:start;gap:10px;margin:27px 0 17px;color:#d0ddf6;font-size:.9rem;line-height:1.5}.consent input{margin-top:4px;accent-color:#40baff}.consent label{font-weight:400;margin:0}.go{width:100%;font-size:1.08rem;padding:18px}.go:disabled{opacity:.4;cursor:not-allowed}.results{margin-top:22px;padding:17px;background:#0a1630;border:1px solid #324a75;border-radius:14px}.results[hidden]{display:none}.result{display:flex;gap:12px;align-items:center;justify-content:space-between;border-top:1px solid #304466;padding:12px 0}.result:first-of-type{border-top:0}.result a{color:#8cddff;font-weight:700}.result span{font-size:.82rem;color:#a9bbda}footer{margin-top:37px;text-align:center;color:#8193bb;font-size:.8rem;line-height:1.6}
+@media(max-width:640px){.container{padding:24px 14px 52px}header{margin-bottom:42px}.panel{padding:20px}.grid{grid-template-columns:1fr}.emailrow{flex-direction:column}h1{font-size:2.65rem}.pill{font-size:.7rem}.result{align-items:start;flex-direction:column}}
+</style>
+</head>
+<body>
+<main class="container">
+<header><div class="brand"><svg viewBox="0 0 64 64" role="img" aria-label="Subnado envelope tornado logo"><defs><linearGradient id="g" x2="1" y2="1"><stop stop-color="#68ebff"/><stop offset="1" stop-color="#2272f8"/></linearGradient></defs><path d="M8 20c20-16 46-10 46 5 0 12-29 18-41 11 15 15 38 2 36-4-1 20-36 20-30 12 11 11 28 2 23-3-4 14-16 15-17 16" fill="none" stroke="url(#g)" stroke-width="6" stroke-linecap="round"/><path d="M17 15h30v18H17z" fill="#f1f9ff" stroke="#1f78da" stroke-width="2" rx="3"/><path d="m18 16 14 11 14-11" fill="none" stroke="#1776df" stroke-width="2.6"/></svg>Subnado</div><span class="pill">No account required</span></header>
+<section class="hero"><div class="eyebrow">Meet your new inbox adventure</div><h1>A world of newsletters. <span class="gradient">One simple place.</span></h1><p class="intro">Find newsletters you actually want, without creating another account. Pick your interests, then visit the publishers' official signup pages.</p></section>
+<section class="panel" aria-label="Newsletter discovery">
+<label for="email">Your email address</label><div class="emailrow"><input type="email" id="email" autocomplete="email" placeholder="you@example.com" required><button id="copy" type="button" class="secondary">Copy address</button></div><p class="muted">Your address remains in this browser tab. Subnado does not transmit or save it.</p>
+<div class="section-top"><h2>Choose your newsletters <span id="count" class="muted"></span></h2><div class="actions"><button id="all" class="secondary" type="button">Select all</button><button id="none" class="secondary" type="button">Clear</button></div></div>
+<div class="grid" id="catalogue"></div>
+<div class="consent"><input id="permission" type="checkbox"><label for="permission">I own or am authorised to manage this email address. I understand each publisher may ask for additional information or email confirmation.</label></div>
+<button id="go" class="go" type="button">Show my signup links →</button><p id="message" class="error" role="alert" aria-live="polite"></p>
+<div id="results" class="results" hidden aria-live="polite"><strong>Ready for the next step</strong><p class="muted">These are official signup pages, not completed subscriptions. Open each, finish its form and any confirmation email. No submissions have been made by Subnado.</p><div id="links"></div></div>
+</section>
+<footer>No login. No bulk submissions. No CAPTCHA bypass. Just newsletter discovery under your control.</footer>
+</main>
+<script>
+'use strict';
+// Verified publisher destinations; each newsletter has its own explicit signup flow.
+const rawNewsletters=[
+{id:'nasa',name:'NASA newsletters',category:'Space & science',description:'Space discoveries and NASA updates',url:'https://www.nasa.gov/newsletters/'},
+{id:'jpl',name:'NASA JPL news',category:'Space & science',description:'Mission and planetary exploration news',url:'https://www.jpl.nasa.gov/newsletter-signup/'},
+{id:'mozilla',name:'Mozilla newsletter',category:'Technology',description:'Internet, products and online life',url:'https://www.mozilla.org/en-US/newsletter/mozilla/'},
+{id:'firefox',name:'Firefox newsletter',category:'Technology',description:'Browser tips and privacy updates',url:'https://www.mozilla.org/en-US/newsletter/firefox/'},
+{id:'mdn',name:'Mozilla Developer',category:'Technology',description:'Web development news and techniques',url:'https://www.mozilla.org/en-US/newsletter/developer/'},
+{id:'nasaexpress',name:'NASA EXPRESS',category:'Learning',description:'Science and STEM opportunities',url:'https://www.nasa.gov/learning-resources/nasa-express/'}
+];
+function uniqueProviders(items){const seen=new Set();return items.filter(item=>{const key=new URL(item.url).href.replace(/\/$/,'').toLowerCase();if(seen.has(key))return false;seen.add(key);return true;});}
+const newsletters=uniqueProviders(rawNewsletters);
+const $=id=>document.getElementById(id);
+function selected(){return [...document.querySelectorAll('.newsletter:checked')].map(c=>c.value)}
+function updateCount(){$('count').textContent='('+selected().length+' selected)';$('results').hidden=true;}
+function render(){const root=$('catalogue');root.replaceChildren();for(const entry of newsletters){const label=document.createElement('label');label.className='option';const check=document.createElement('input');check.type='checkbox';check.className='newsletter';check.value=entry.id;check.addEventListener('change',updateCount);const text=document.createElement('span');const strong=document.createElement('strong');strong.textContent=entry.name;const small=document.createElement('small');small.textContent=entry.category+' · '+entry.description;text.append(strong,small);label.append(check,text);root.append(label);}updateCount();}
+$('all').addEventListener('click',()=>{document.querySelectorAll('.newsletter').forEach(c=>c.checked=true);updateCount()});
+$('none').addEventListener('click',()=>{document.querySelectorAll('.newsletter').forEach(c=>c.checked=false);updateCount()});
+$('copy').addEventListener('click',async()=>{if(!$('email').checkValidity()){$('message').textContent='Enter a valid email address first.';return;}try{await navigator.clipboard.writeText($('email').value.trim());$('message').textContent='';$('copy').textContent='Copied!';setTimeout(()=>$('copy').textContent='Copy address',1700);}catch{$('message').textContent='Your browser blocked copying. Select the address and copy it manually.';}});
+$('go').addEventListener('click',()=>{const email=$('email');$('message').textContent='';$('results').hidden=true;if(!email.checkValidity()){$('message').textContent='Please enter a valid email address.';email.focus();return;}if(!$('permission').checked){$('message').textContent='Please confirm that you are authorised to use this address.';return;}const ids=new Set(selected());if(!ids.size){$('message').textContent='Choose at least one newsletter.';return;}const links=$('links');links.replaceChildren();for(const entry of newsletters.filter(x=>ids.has(x.id))){const row=document.createElement('div');row.className='result';const info=document.createElement('div');const name=document.createElement('strong');name.textContent=entry.name;const detail=document.createElement('span');detail.textContent=' · '+entry.category;info.append(name,detail);const a=document.createElement('a');a.href=entry.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Open signup ↗';row.append(info,a);links.append(row);}$('results').hidden=false;$('results').scrollIntoView({behavior:'smooth',block:'nearest'});});
+render();
+</script>
+</body></html>
