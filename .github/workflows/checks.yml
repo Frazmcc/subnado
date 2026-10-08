@@ -12,4 +12,4 @@ jobs:
         with:
           node-version: '22'
       - name: Run smoke checks
-        run: node tests/smoke.test.cjs
+        run: npm test
